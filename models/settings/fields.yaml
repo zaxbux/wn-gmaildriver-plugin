@@ -1,0 +1,10 @@
+fields:
+  credentials:
+    label: 'Gmail API Credentials'
+    span: left
+    comment: October CMS won't be able to send email until you upload credentials and authorize access. <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Generate API credentials</a>
+    commentHtml: true
+    type: fileupload
+    mode: file
+    fileTypes: json
+    useCaption: false

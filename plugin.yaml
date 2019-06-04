@@ -1,0 +1,6 @@
+plugin:
+    name: 'zaxbux.gmailmailerdriver::lang.plugin.name'
+    description: 'zaxbux.gmailmailerdriver::lang.plugin.description'
+    author: 'Zachary Schneider'
+    icon: oc-icon-envelope-square
+    homepage: 'https://www.zacharyschneider.ca/'
