@@ -39,6 +39,7 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 ## Change Log
 
+* 1.0.2 - Fixed errors that occur when invalid credentials are supplied
 * 1.0.1 - First version
 
 ## TODO

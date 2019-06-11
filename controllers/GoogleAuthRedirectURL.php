@@ -22,7 +22,7 @@ class GoogleAuthRedirectURL extends Controller {
 			
 			Settings::set(Settings::TOKEN_FIELD, $accessToken);
 		} catch (\Exception $ex) {
-			return new Response($ex->getMessage());
+			return 'Error authorizing Gmail Driver plugin: '.$ex->getMessage();
 		}
 
 		return Redirect::to(Backend::url('system/settings/update/zaxbux/gmailmailerdriver/gmail'));
