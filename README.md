@@ -44,4 +44,4 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 ## TODO
 
-* All done!
+* Revoke API token with Google when settings are reset
