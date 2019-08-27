@@ -81,9 +81,9 @@ class Plugin extends PluginBase {
 
 			if ($credentials = Settings::instance()->credentials) {
 
-				$client = GoogleAPI::getClient($credentials, Settings::get(Settings::TOKEN_FIELD));
-
 				try {
+					$client = GoogleAPI::getClient($credentials, Settings::get(Settings::TOKEN_FIELD));
+
 					$isAuthorized = $client->isAccessTokenExpired() && !$client->getRefreshToken();
 
 					if ($isAuthorized) {
