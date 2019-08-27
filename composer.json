@@ -10,6 +10,7 @@
         }
     ],
     "require": {
-        "google/apiclient": "2.0"
+				"google/apiclient": "~2.2",
+				"guzzlehttp/guzzle": "~6.3"
     }
 }
