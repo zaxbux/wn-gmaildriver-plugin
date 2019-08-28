@@ -32,16 +32,17 @@ The plugin is configured in your October CMS backend settings. Change the mail m
 To make sure everything is working, try test sending a mail template to yourself.
 
 ### Revoking access
-In case you want to revoke access, click **Reset to default** on the *Gmail configuration* page. This will delete the credentials and access tokens. You will also want to [remove app access on your Google account](https://support.google.com/accounts/answer/3466521).
+In case you want to revoke access, click **Reset to default** on the *Gmail configuration* page. This will delete the credentials and access tokens. You may also want to [remove app access on your Google account](https://support.google.com/accounts/answer/3466521).
 
 ## Important Notes
 * The Gmail API will only send emails as the account which you granted access with, it is currently not possible to send email as another user.
 
 ## Change Log
 
-* 1.0.2 - Fixed errors that occur when invalid credentials are supplied
-* 1.0.1 - First version
+* 1.0.3 - Fixed logic issues, app is removed from user account when settings are reset. Updated dependencies.
+* 1.0.2 - Fixed errors that occur when invalid credentials are supplied.
+* 1.0.1 - First version.
 
 ## TODO
 
-* Revoke API token with Google when settings are reset
+All done!
