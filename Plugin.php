@@ -84,7 +84,15 @@ class Plugin extends PluginBase {
 				try {
 					$client = GoogleAPI::getClient($credentials, Settings::get(Settings::TOKEN_FIELD));
 
-					$isAuthorized = !$client->isAccessTokenExpired() && !empty($client->getRefreshToken());
+					$isAuthorized = false;
+
+					if ($client->isAccessTokenExpired() != true && $client->getRefreshToken()) {
+						$client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+
+						Settings::set(Settings::TOKEN_FIELD, $client->getAccessToken());
+
+						$isAuthorized = !$client->isAccessTokenExpired();
+					}
 
 					if (!$isAuthorized) {
 						$authUrl = $client->createAuthUrl();
