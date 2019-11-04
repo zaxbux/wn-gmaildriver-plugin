@@ -18,16 +18,16 @@ class Plugin extends PluginBase {
 	 */
 	public function registerSettings() {
 		return [
-				'gmail' => [
-						'label'       => 'Gmail Configuration',
-						'description' => 'Configure sending with Gmail',
-						'category'    => 'system::lang.system.categories.mail',
-						'icon'        => 'icon-envelope',
-						'class'       => 'Zaxbux\\GmailMailerDriver\\Models\\Settings',
-						'order'       => 620,
-						'keywords'    => 'google gmail mail email',
-						'permissions' => ['zaxbux.gmailmailerdriver.access_settings']
-				]
+			'gmail' => [
+				'label'       => 'Gmail Configuration',
+				'description' => 'Configure sending with Gmail',
+				'category'    => 'system::lang.system.categories.mail',
+				'icon'        => 'icon-envelope',
+				'class'       => 'Zaxbux\\GmailMailerDriver\\Models\\Settings',
+				'order'       => 620,
+				'keywords'    => 'google gmail mail email',
+				'permissions' => ['zaxbux.gmailmailerdriver.access_settings']
+			],
 		];
 	}
 
@@ -44,21 +44,33 @@ class Plugin extends PluginBase {
 				return;
 			}
 
-			$field = $widget->getField('send_mode');
-			$field->options(array_merge($field->options(), [self::MODE_GMAIL => 'Gmail']));
+			$sendModeField = $widget->getField('send_mode');
+			$sendModeField->options(array_merge($sendModeField->options(), [self::MODE_GMAIL => 'Gmail']));
 
 			$widget->addTabFields([
-					'gmail_settings_link' => [
-							'type' => 'partial',
-							'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_gmail_settings_link.htm',
-							'tab' => 'system::lang.mail.general',
-							'trigger' => [
-									'action' => 'show',
-									'field' => 'send_mode',
-									'condition' => 'value[' . self::MODE_GMAIL . ']'
-							]
+				'gmail_settings_link' => [
+					'type' => 'partial',
+					'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_gmail_settings_link.htm',
+					'tab' => 'system::lang.mail.general',
+					'trigger' => [
+						'action' => 'show',
+						'field' => 'send_mode',
+						'condition' => 'value[' . self::MODE_GMAIL . ']'
 					]
+				]
 			]);
+
+			// Gmail ignored these settings, so hide them from the user when Gmail is selected
+			$widget->getField('sender_name')->trigger = [
+				'action' => 'hide',
+				'field' => 'send_mode',
+				'condition' => 'value[' . self::MODE_GMAIL . ']'
+			];
+			$widget->getField('sender_email')->trigger = [
+				'action' => 'hide',
+				'field' => 'send_mode',
+				'condition' => 'value[' . self::MODE_GMAIL . ']'
+			];
 		});
 
 		\Event::listen('backend.form.extendFields', function ($widget) {
@@ -71,84 +83,60 @@ class Plugin extends PluginBase {
 			}
 
 			$widget->addFields([
-					'_auth_redirect_uri' => [
-							'type' => 'partial',
-							'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_redirect_uri.htm',
-							'span' => 'right'
-					]
+				'_auth_redirect_uri' => [
+					'type' => 'partial',
+					'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_redirect_uri.htm',
+					'span' => 'right',
+				],
 			]);
 			$widget->getField('_auth_redirect_uri')->value = (new GoogleAuthRedirectURL)->actionUrl('');
 
-			if ($credentials = Settings::instance()->credentials) {
+			try {
+				$googleAPI = new GoogleAPI();
 
-				try {
-					$client = GoogleAPI::getClient($credentials, Settings::get(Settings::TOKEN_FIELD));
+				if ($googleAPI->isAuthorized()) {
+					//$sendAsEmail       = $googleAPI->getServiceGmailSendAs()->getSendAsEmail();
+					//$sendAsDisplayName = $googleAPI->getServiceGmailSendAs()->getDisplayName();
 
-					$isAuthorized = false;
-
-					if ($client->isAccessTokenExpired() != true && $client->getRefreshToken()) {
-						$client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-
-						Settings::set(Settings::TOKEN_FIELD, $client->getAccessToken());
-
-						$isAuthorized = !$client->isAccessTokenExpired();
-					}
-
-					if (!$isAuthorized) {
-						$authUrl = $client->createAuthUrl();
-					}
-				} catch (\InvalidArgumentException $ex) {
-					Log::alert($ex);
-
+					// Tell user that authorization was successful
 					$widget->addFields([
-							'_error' => [
-									'type' => 'partial',
-									'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_error.htm'
-							]
+						'_authorized' => [
+							'type' => 'partial',
+							'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_authorized.htm',
+						],
 					]);
-					$widget->getField('_error')->value = $ex->getMessage();
-
-					return;
-				}
-
-				
-				if ($isAuthorized) {
-						// Tell user that authorization was successful
-						$widget->addFields([
-							'_authorized' => [
-								'type' => 'partial',
-								'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_authorized.htm'
-								]
-						]);
+					//$widget->getField('_authorized')->value = "{$sendAsDisplayName} &lt;{$sendAsEmail}&gt;";
 				} else {
-					// If there is no previous token or it's expired, request authorization from the user.
-					$widget->addFields([
-						'_authorize' => [
+					// Credentials must be present in order for an auth URL to be generated
+					if ($googleAPI->getAuthConfig()) {
+						$authUrl = $googleAPI->client->createAuthUrl();
+
+						// If there is no previous token or it's expired, request authorization from the user.
+						$widget->addFields([
+							'_authorize' => [
 								'type' => 'partial',
 								'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_authorize.htm'
-						]
-				]);
-				$widget->getField('_authorize')->value = $authUrl;
+							]
+						]);
+						$widget->getField('_authorize')->value = $authUrl;
+					}
 				}
+			} catch (\Exception $ex) {
+				Log::alert($ex);
+
+				$widget->addFields([
+					'_error' => [
+						'type' => 'partial',
+						'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_error.htm'
+					]
+				]);
+				$widget->getField('_error')->value = $ex->getMessage();
 			}
 		});
 
 		\App::extend('swift.transport', function (\Illuminate\Mail\TransportManager $manager) {
 			return $manager->extend(self::MODE_GMAIL, function () {
-				$client = GoogleAPI::getClient(Settings::instance()->credentials, Settings::get(Settings::TOKEN_FIELD));
-
-				// Refresh access token as needed
-				if ($client->isAccessTokenExpired()) {
-					if ($client->getRefreshToken()) {
-						$client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-
-						Settings::set(Settings::TOKEN_FIELD, $client->getAccessToken());
-					} else {
-						throw new \Exception('Cannot send email. Gmail API not authorized.');
-					}
-				}
-
-				return new GmailTransport($client);
+				return new GmailTransport();
 			});
 		});
 	}

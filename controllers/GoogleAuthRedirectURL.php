@@ -7,7 +7,6 @@ use Response;
 use Redirect;
 use Backend;
 use Backend\Classes\Controller;
-use Zaxbux\GmailMailerDriver\Models\Settings;
 use Zaxbux\GmailMailerDriver\Classes\GoogleAPI;
 
 class GoogleAuthRedirectURL extends Controller {
@@ -16,13 +15,12 @@ class GoogleAuthRedirectURL extends Controller {
 
 	public function index() {
 		try {
-			$client = GoogleAPI::getClient(Settings::instance()->credentials);
-
-			$accessToken = $client->fetchAccessTokenWithAuthCode(Input::get('code'));
+			$authCode = Input::get('code');
 			
-			Settings::set(Settings::TOKEN_FIELD, $accessToken);
+			$googleAPI = new GoogleAPI();
+			$googleAPI->authorize($authCode);
 		} catch (\Exception $ex) {
-			return 'Error authorizing Gmail Driver plugin: '.$ex->getMessage();
+			return 'Error authorizing Gmail Driver plugin: ' . $ex->getMessage();
 		}
 
 		return Redirect::to(Backend::url('system/settings/update/zaxbux/gmailmailerdriver/gmail'));
