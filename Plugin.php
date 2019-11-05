@@ -34,6 +34,21 @@ class Plugin extends PluginBase {
 	/**
 	 * {@inheritdoc}
 	 */
+	public function registerReportWidgets() {
+		return [
+			'Zaxbux\\GmailMailerDriver\\ReportWidgets\\AuthorizationStatus' => [
+				'label' => 'Gmail Driver Authorization Status',
+				'context' => 'dashboard',
+				'permissions' => [
+					'zaxbux.gmailmailerdriver.access_settings'
+				],
+			],
+		];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function boot() {
 		\Event::listen('backend.form.extendFields', function ($widget) {
 			if (!$widget->getController() instanceof \System\Controllers\Settings) {
