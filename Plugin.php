@@ -14,6 +14,11 @@ class Plugin extends PluginBase {
 	const MODE_GMAIL = 'gmail';
 
 	/**
+	 * @var bool Plugin requires elevated permissions. Required for using the gmail driver to restore user passwords.
+	 */
+	public $elevated = true;
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function registerSettings() {

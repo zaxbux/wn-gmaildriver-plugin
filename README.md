@@ -39,6 +39,7 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 ## Change Log
 
+* 1.0.8 - Plugin requires elevated permissions to function on restore password page.
 * 1.0.7 - Added settings permissions
 * 1.0.6 - Added authorization status dashboard widget.
 * 1.0.5 - Cleaned up Gmail API authorization flow.
