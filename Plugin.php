@@ -34,6 +34,18 @@ class Plugin extends PluginBase {
 	/**
 	 * {@inheritdoc}
 	 */
+	public function registerPermissions() {
+		return [
+			'zaxbux.gmailmailerdriver.access_settings' => [
+				'label' => 'Manage Gmail Settings',
+				'tab' => 'Gmail Driver'
+			],
+		];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function registerReportWidgets() {
 		return [
 			'Zaxbux\\GmailMailerDriver\\ReportWidgets\\AuthorizationStatus' => [

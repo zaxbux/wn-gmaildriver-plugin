@@ -39,6 +39,7 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 ## Change Log
 
+* 1.0.7 - Added settings permissions
 * 1.0.6 - Added authorization status dashboard widget.
 * 1.0.5 - Cleaned up Gmail API authorization flow.
 * 1.0.4 - Fixed issue where backend authorization status showed expired when it was authorized.
