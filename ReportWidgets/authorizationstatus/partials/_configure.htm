@@ -1,12 +1,15 @@
 <div class="report-widget">
-        <h3>Gmail Driver Authorization Status</h3>
+    <h3><?=e(trans('zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.label'));?></h3>
     <div class="callout fade in callout-warning">
         <div class="header">
             <i class="icon-warning"></i>
-            <p><strong>Setup Required</strong><br>Gmail Driver requires credentials to send emails.</p>
+            <p>
+                <strong><?=e(trans('zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.configure.label'));?></strong><br>
+                <?=e(trans('zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.configure.comment'));?>
+            </p>
         </div>
         <div class="content m-a-0">
-            <a href="<?=$pluginSettingsURL?>" class="btn btn-primary btn-block p-x">Configure Gmail Driver</a>
+            <a href="<?=$pluginSettingsURL?>" class="btn btn-primary btn-block p-x"><?=e(trans('zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.configure.button'));?></a>
         </div>
     </div>
 </div>

@@ -1,10 +1,7 @@
 <div class="callout fade in callout-danger">
 	<div class="header">
 		<i class="icon-warning"></i>
-		<h3>Error!</h3>
-		<p>There was a problem with granting access to the Gmail API. Please create new credentials and try again.</p>
-	</div>
-	<div class="content">
-		<p><?=$value?></p>
+		<h3><?=e(trans('zaxbux.gmailmailerdriver::lang.partials.gmail_api_error.label'));?></h3>
+		<p><?=e(trans('zaxbux.gmailmailerdriver::lang.partials.gmail_api_error.comment'));?></p>
 	</div>
 </div>
