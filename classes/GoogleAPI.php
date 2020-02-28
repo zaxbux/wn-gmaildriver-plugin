@@ -3,6 +3,7 @@
 namespace Zaxbux\GmailMailerDriver\Classes;
 
 use Log;
+use Config;
 use Zaxbux\GmailMailerDriver\Models\Settings;
 use Google_Client;
 use Google_Service_Gmail;
@@ -33,10 +34,9 @@ class GoogleAPI {
 		
 		$this->client = new Google_Client();
 		$this->client->setApplicationName('October CMS Gmail Driver by Zaxbux'); // Used in the request User-Agent header
-		$this->client->setScopes([
-			//Google_Service_Gmail::GMAIL_READONLY,
-			Google_Service_Gmail::GMAIL_SEND,
-		]);
+
+		$defaultScopes = [ Google_Service_Gmail::GMAIL_SEND ];
+		$this->client->setScopes(Config::get('zaxbux.gmailmailerdriver::google.scopes', $defaultScopes));
 
 		if ($authConfig) {
 			$this->client->setAuthConfig($authConfig);

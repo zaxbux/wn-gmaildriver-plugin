@@ -37,8 +37,17 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 ## Important Notes
 * The Gmail API will only send emails as the account which you granted access with, it is currently not possible to send email as another user.
 
+## Advanced Usage
+
+This section is for advanced users.
+
+### Authentication Scopes
+
+To change the authentication scopes (permissions requested from the user), you can override the default scopes in `config/config.php`. Add scopes to the `google.scopes` array. For the plugin to function correctly, the `gmail.send` scope is required. [Gmail Auth Scopes](https://developers.google.com/gmail/api/auth/scopes)
+
 ## Change Log
 
+* 1.0.10 - Added ability to change auth scopes used with the Google API client.
 * 1.0.9 - Improved localization.
 * 1.0.8 - Plugin requires elevated permissions to function on restore password page.
 * 1.0.7 - Added settings permissions
