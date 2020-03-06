@@ -97,7 +97,7 @@ class GmailTransport implements Swift_Transport
 
                 // Set client to deferred mode
                 $this->googleAPI->client->setDefer(true);
-                $gmailMessage = $this->googleAPI->getServiceGmail()->users_messages->send('me', $gmailMessage, ['uploadType' => 'resumable']); // Resumable upload type
+                $gmailMessage = $this->googleAPI->getServiceGmail()->users_messages->send('me', $gmailMessage, ['uploadType' => Google_Http_MediaFileUpload::UPLOAD_RESUMABLE_TYPE]); // Resumable upload type
 
                 // Use chunks of 3 MB
                 $chunkSizeBytes = 3 * 1024 * 1024;
