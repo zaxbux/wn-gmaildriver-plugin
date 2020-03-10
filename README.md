@@ -65,4 +65,4 @@ All done!
 
 ## Acknowledgments
 
-* @alxy - Increased max sending size to 35MB.
+* [@alxy](https://github.com/alxy) - Increased max sending size to 35MB.
