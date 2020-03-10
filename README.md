@@ -47,6 +47,7 @@ To change the authentication scopes (permissions requested from the user), you c
 
 ## Change Log
 
+* 1.0.11 - Increased max sending size to 35MB (encoded message size).
 * 1.0.10 - Added ability to change auth scopes used with the Google API client.
 * 1.0.9 - Improved localization.
 * 1.0.8 - Plugin requires elevated permissions to function on restore password page.
@@ -61,3 +62,7 @@ To change the authentication scopes (permissions requested from the user), you c
 ## TODO
 
 All done!
+
+## Acknowledgments
+
+* @alxy - Increased max sending size to 35MB.
