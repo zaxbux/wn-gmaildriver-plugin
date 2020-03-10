@@ -2,6 +2,7 @@
 
 namespace Zaxbux\GmailMailerDriver\Classes;
 
+use Google_Http_MediaFileUpload;
 use Log;
 use ApplicationException;
 use Zaxbux\GmailMailerDriver\Classes\GoogleAPI;
@@ -81,12 +82,43 @@ class GmailTransport implements Swift_Transport
      */
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null) {
         try {
-            $encodedMessage = $this::base64url($message);
+            // Check if the total mail mime size is less than 5 MB
+            if(strlen($message->toString()) < 5 * 1024 * 1024) {
+                $encodedMessage = $this::base64url($message);
 
-            $gmailMessage = new Google_Service_Gmail_Message();
-            $gmailMessage->setRaw($encodedMessage);
+                $gmailMessage = new Google_Service_Gmail_Message();
+                $gmailMessage->setRaw($encodedMessage);
 
-            $gmailMessage = $this->googleAPI->getServiceGmail()->users_messages->send('me', $gmailMessage); // 'me' references the currently authenticated user
+                // Immediately send the mail
+                $gmailMessage = $this->googleAPI->getServiceGmail()->users_messages->send('me', $gmailMessage); // 'me' references the currently authenticated user
+            } else {
+                // Use a resumable upload for large mails
+                $gmailMessage = new Google_Service_Gmail_Message();
+
+                // Set client to deferred mode
+                $this->googleAPI->client->setDefer(true);
+                $gmailMessage = $this->googleAPI->getServiceGmail()->users_messages->send('me', $gmailMessage, ['uploadType' => Google_Http_MediaFileUpload::UPLOAD_RESUMABLE_TYPE]); // Resumable upload type
+
+                // Use chunks of 3 MB
+                $chunkSizeBytes = 3 * 1024 * 1024;
+                $media = new Google_Http_MediaFileUpload(
+                    $this->googleAPI->client,
+                    $gmailMessage,
+                    'message/rfc822',
+                    $message->toString(),
+                    true,
+                    $chunkSizeBytes
+                );
+                $media->setFileSize(strlen($message->toString()));
+
+                $status = false;
+                while (! $status) {
+                    $status = $media->nextChunk();
+                }
+
+                // Reset client to immediately send requests
+                $this->googleAPI->client->setDefer(false);
+            }
         } catch (\Google_Service_Exception $ex) {
             Log::alert("Error sending Gmail message:\n".$ex->getMessage());
             throw new ApplicationException('Failed to send email. Check event log for more info. '.json_decode($ex->getMessage(), true)['error']['message']);
