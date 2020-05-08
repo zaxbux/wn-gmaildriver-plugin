@@ -148,11 +148,28 @@ class Plugin extends PluginBase {
 					],
 				]);
 			}
+
+			// Show "review me" callout if not hidden
+			if (!Settings::get('_review_hidden')) {
+				$widget->addFields([
+					'_review_hidden' => [
+						'type' => 'partial',
+						'path' => '$/zaxbux/gmailmailerdriver/partials/_review.htm',
+					],
+				]);
+			}
 		});
 
 		\App::extend('swift.transport', function (\Illuminate\Mail\TransportManager $manager) {
 			return $manager->extend(self::MODE_GMAIL, function () {
 				return new GmailTransport();
+			});
+		});
+
+		Settings::extend(function($model) {
+			$model->bindEvent('model.beforeSave', function() use ($model) {
+				// Convert hidden input value to boolean
+				$model->setSettingsValue('_review_hidden', $model->getSettingsValue('_review_hidden', false) ? true : false);
 			});
 		});
 	}

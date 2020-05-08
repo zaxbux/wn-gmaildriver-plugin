@@ -32,6 +32,10 @@
             'label'   => 'Error!',
             'comment' => 'There was a problem with granting access to the Gmail API. Please create new credentials and try again. Check the error log for more information.',
         ],
+        'review' => [
+            'header' => 'Did you find this plugin useful?',
+            'link' => 'Rate it and leave a review!',
+        ]
     ],
     'widgets' => [
         'authorizationstatus' => [

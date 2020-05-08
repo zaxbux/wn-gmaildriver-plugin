@@ -1,16 +1,14 @@
 fields:
+  _auth_redirect_uri:
+    type: partial
+    path: $/zaxbux/gmailmailerdriver/partials/_auth_redirect_uri.htm
+
   credentials:
+    type: fileupload
     label: zaxbux.gmailmailerdriver::lang.settings.field.credentials.label
     comment: zaxbux.gmailmailerdriver::lang.settings.field.credentials.comment
     commentHtml: true
-    span: left
-    type: fileupload
+    span: full
     mode: file
     fileTypes: json
     useCaption: false
-  _auth_redirect_uri:
-    label: zaxbux.gmailmailerdriver::lang.settings.field.auth_redirect_uri.label
-    comment: zaxbux.gmailmailerdriver::lang.settings.field.auth_redirect_uri.comment
-    span: right
-    type: text
-    readOnly: true

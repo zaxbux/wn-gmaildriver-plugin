@@ -1,0 +1,18 @@
+<div class="callout callout-info no-icon" data-review-callout>
+	<button type="button" class="close" data-dismiss="callout" aria-hidden="true">&times;</button>
+	<div class="header">
+		<h3><?=e(trans('zaxbux.gmailmailerdriver::lang.partials.review.header'));?></h3>
+	</div>
+	<div class="content">
+		<p><a href="https://octobercms.com/plugin/zaxbux-gmailmailerdriver#reviews" target="_blank" rel="noopener"><i class="icon-star"></i> <?=e(trans('zaxbux.gmailmailerdriver::lang.partials.review.link'));?></a></p>
+	</div>
+</div>
+<input type="hidden" name="Settings[_review_hidden]">
+<script type="application/javascript">
+	$(document).on('close.oc.callout', function(e) {
+		console.log(e);
+		if (e.target.hasAttribute('data-review-callout')) {
+			$('input[name="Settings[_review_hidden]"]').val('1');
+		}
+	});
+</script>
