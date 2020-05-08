@@ -9,3 +9,4 @@
 1.0.9: Improved localization.
 1.0.10: Added ability to change auth scopes used with the Google API client.
 1.0.11: Increased max sending size to 35MB.
+1.0.12: Improve UI
