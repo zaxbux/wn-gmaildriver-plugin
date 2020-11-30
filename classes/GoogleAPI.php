@@ -64,11 +64,15 @@ class GoogleAPI {
 	}
 
 	/**
-	 * Get an instance of the Gmail SendAs API service
-	 * @return Google_Service_Gmail_SendAs
+	 * Get an instance of the Gmail API service
+	 * @return Google_Service_Gmail
 	 */
-	public function getServiceGmailSendAs() {
-		return $this->getServiceGmail()->users_settings_sendAs->get('me', $this->getServiceGmail()->users->getProfile('me')->getEmailAddress());
+	public function getServiceGmail() {
+		if (!$this->gmailService) {
+			$this->gmailService = new Google_Service_Gmail($this->client);
+		}
+
+		return $this->gmailService;
 	}
 
 	/**
@@ -92,16 +96,17 @@ class GoogleAPI {
 
 	/**
 	 * Get stored OAuth credentials
-	 * @return array
+	 * @return array|null
 	 */
 	public function getAuthConfig() {
-		$file = Settings::instance()->credentials;
+		$config = Config::get('zaxbux.gmailmailerdriver::google.credentials');
 
-		if (!$file) {
-			return;
+		// Use file uploaded in settings
+		if ($file = Settings::instance()->credentials) {
+			$config = $file->getContents();
 		}
 
-		return json_decode($file->getContents(), true);
+		return $config ? json_decode($config, true) : null;
 	}
 
 	/**

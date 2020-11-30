@@ -4,8 +4,8 @@ Send email with Gmail using this driver plugin for OctoberCMS.
 
 ## Requirements
 
-* A Gmail account (GSuite accounts are supported)
-* Gmail API credentials
+* A Gmail account. Google Workspace (G Suite) accounts are also supported, if your administrator has enabled access.
+* Gmail API credentials (see below).
 
 ## Plugin Settings
 
@@ -42,12 +42,35 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 This section is for advanced users.
 
+**Note:** To avoid overwriting your custom configuration with plugin updates, copy the provided `config.php` to your October CMS's config directory: `config/zaxbux/gmailmailerdriver/config.php`.
+
+### Providing credentials
+
+To provide the OAuth credentials without uploading them through the backend UI, you can add them in the plugin's `config.php` file. This is useful if you want to provide credentials using an environment variable. By default, the contents of the `GOOGLE_APPLICATION_CREDENTIALS_JSON` environment variable will be used.
+
+Example:
+
+```php
+    'credentials' => '{"web": {"client_id": "000000000000-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com", ... }}',
+```
+
 ### Authentication Scopes
 
-To change the authentication scopes (permissions requested from the user), you can override the default scopes in `config/config.php`. Add scopes to the `google.scopes` array. For the plugin to function correctly, the `gmail.send` scope is required. [Gmail Auth Scopes](https://developers.google.com/gmail/api/auth/scopes)
+To change the authentication scopes (permissions requested from the user), you can override the default scopes in the plugin's `config.php` file. Add scopes to the `google.scopes` array. For the plugin to function correctly, the `gmail.send` scope is required. [Gmail Auth Scopes](https://developers.google.com/gmail/api/auth/scopes)
+
+Example:
+
+```php
+    'scopes' => [
+        \Google_Service_Gmail::GMAIL_SEND,
+        \Google_Service_Gmail::GMAIL_READONLY,
+    ],
+```
 
 ## Change Log
 
+* 1.0.13 - Added Gmail alias documentation, added ability to pass credentials via envrionment vars.
+* 1.0.12 - Improve UI.
 * 1.0.11 - Increased max sending size to 35MB (encoded message size).
 * 1.0.10 - Added ability to change auth scopes used with the Google API client.
 * 1.0.9 - Improved localization.
