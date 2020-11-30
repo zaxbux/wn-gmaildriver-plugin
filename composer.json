@@ -10,7 +10,15 @@
         }
     ],
     "require": {
-				"google/apiclient": "~2.2",
-				"guzzlehttp/guzzle": "~6.3"
+        "google/apiclient": "~2.7",
+        "guzzlehttp/guzzle": "~6.3"
+    },
+    "scripts": {
+        "post-update-cmd": ["Google\\Task\\Composer::cleanup"]
+    },
+    "extra": {
+        "google/apiclient-services": [
+            "Gmail"
+        ]
     }
 }
