@@ -89,18 +89,6 @@ class Plugin extends PluginBase {
 					],
 				],
 			]);
-
-			// Gmail ignored these settings, so hide them from the user when Gmail is selected
-			$widget->getField('sender_name')->trigger = [
-				'action'    => 'hide',
-				'field'     => 'send_mode',
-				'condition' => 'value[' . self::MODE_GMAIL . ']',
-			];
-			$widget->getField('sender_email')->trigger = [
-				'action'    => 'hide',
-				'field'     => 'send_mode',
-				'condition' => 'value[' . self::MODE_GMAIL . ']',
-			];
 		});
 
 		\Event::listen('backend.form.extendFields', function ($widget) {

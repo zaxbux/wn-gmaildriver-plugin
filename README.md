@@ -36,6 +36,7 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 ## Important Notes
 * The Gmail API will only send emails as the account which you granted access with, it is currently not possible to send email as another user.
+* You can send email using another email address you own, using an alias. [Learn more](https://support.google.com/mail/answer/22370). Change the *Sender name* and *Sender email* in **Mail configuration** to match your alias.
 
 ## Advanced Usage
 

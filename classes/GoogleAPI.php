@@ -64,18 +64,6 @@ class GoogleAPI {
 	}
 
 	/**
-	 * Get an instance of the Gmail API service
-	 * @return Google_Service_Gmail
-	 */
-	public function getServiceGmail() {
-		if (!$this->gmailService) {
-			$this->gmailService = new Google_Service_Gmail($this->client);
-		}
-
-		return $this->gmailService;
-	}
-
-	/**
 	 * Get an instance of the Gmail SendAs API service
 	 * @return Google_Service_Gmail_SendAs
 	 */
