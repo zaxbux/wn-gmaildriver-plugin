@@ -5,7 +5,7 @@
 			<i class="icon-check"></i>
 			<p>
 				<strong><?=e(trans('zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.authorized.label'));?></strong><br>
-				<?=e(trans('zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.authorized.comment'));?>
+				<?=e(trans('zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.authorized.comment', ['app_name' => Config::get('app.name')]));?>
 			</p>
 		</div>
 	</div>

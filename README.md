@@ -1,6 +1,6 @@
-# Gmail Mailer Driver for October CMS
+# Gmail Mailer Driver
 
-Send email with Gmail using this driver plugin for OctoberCMS.
+Send email with Gmail using this driver plugin for October CMS.
 
 ## Requirements
 
@@ -9,7 +9,7 @@ Send email with Gmail using this driver plugin for OctoberCMS.
 
 ## Plugin Settings
 
-The plugin is configured in your October CMS backend settings. Change the mail method to ``Gmail`` in **Mail configuration**, save the settings and go to **Gmail configuration** to upload your API credentials. Obtain API credentials from the [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
+The plugin is configured in your backend settings. Change the mail method to ``Gmail`` in **Mail configuration**, save the settings and go to **Gmail configuration** to upload your API credentials. Obtain API credentials from the [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
 
 ### Obtaining API Keys
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/apis/credentials) and create a new project.

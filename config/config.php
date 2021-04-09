@@ -20,7 +20,7 @@ return [
 		//],
 
 		/**
-		 * The contents of the dwonloaded OAuth credentials JSON file.
+		 * The contents of the downloaded OAuth credentials JSON file, or an object containing 'client_id' and 'client_secret'
 		 */
 		'credentials' => env('GOOGLE_APPLICATION_CREDENTIALS_JSON'),
 	],

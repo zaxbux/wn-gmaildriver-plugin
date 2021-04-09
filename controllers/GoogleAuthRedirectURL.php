@@ -2,6 +2,8 @@
 
 namespace Zaxbux\Gmailmailerdriver\Controllers;
 
+use Log;
+use Flash;
 use Input;
 use Response;
 use Redirect;
@@ -20,9 +22,10 @@ class GoogleAuthRedirectURL extends Controller {
 			$googleAPI = new GoogleAPI();
 			$googleAPI->authorize($authCode);
 		} catch (\Exception $ex) {
-			return 'Error authorizing Gmail Driver plugin: ' . $ex->getMessage();
+			Flash::error('Error authorizing Gmail Driver plugin: ' . $ex->getMessage());
+			Log::error($ex);
 		}
 
-		return Redirect::to(Backend::url('system/settings/update/zaxbux/gmailmailerdriver/gmail'));
+		return Backend::redirect('system/settings/update/zaxbux/gmailmailerdriver/gmail');
 	}
 }

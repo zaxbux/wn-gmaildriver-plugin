@@ -1,7 +1,7 @@
 <?php return [
 	'plugin' => [
 		'name'        => 'Gmail Mailer Driver',
-		'description' => 'Send email with Gmail using this driver plugin for OctoberCMS.'
+		'description' => 'Send email with Gmail using this driver plugin.'
 	],
 	'permissions' => [
 		'access_settings' => [
@@ -13,13 +13,17 @@
 		'label'       => 'Gmail Configuration',
 		'description' => 'Configure sending with Gmail',
 		'field'       => [
-			'credentials' => [
-				'label'   => 'Gmail API Credentials',
-				'comment' => 'Gmail API credentials are required to send emails. <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Generate API credentials</a>'
-			],
 			'auth_redirect_uri' => [
 				'label' => 'Authorized Redirect URI',
-				'comment' => 'This Authorized Redirect URI is used as a restriction when creating a new OAuth Client ID.',
+				'comment' => 'This Authorized Redirect URI is used as a restriction when creating a new OAuth Client ID. <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Generate API credentials <i class="icon-external-link"></i></a>',
+			],
+			'client_id' => [
+				'label'   => 'OAuth Client ID',
+				'comment' => '',
+			],
+			'client_secret' => [
+				'label'   => 'OAuth Client secret',
+				'comment' => '',
 			],
 		],
 	],
@@ -35,14 +39,14 @@
 		'review' => [
 			'header' => 'Did you find this plugin useful?',
 			'link' => 'Rate it and leave a review!',
-		]
+		],
 	],
 	'widgets' => [
 		'authorizationstatus' => [
 			'label'        => 'Gmail Driver Authorization Status',
 			'authorized'   => [
 				'label'   => 'Authorized',
-				'comment' => 'October CMS is authorized to send emails via Gmail.',
+				'comment' => ':app_name is authorized to send emails via Gmail.',
 				'button'  => 'Test Delivery',
 			],
 			'configure'    => [
@@ -52,7 +56,7 @@
 			],
 			'unauthorized' => [
 				'label'   => 'Unauthorized',
-				'comment' => 'October CMS requires authorization to send emails via Gmail.',
+				'comment' => ':app_name requires authorization to send emails via Gmail.',
 				'button'  => 'Authorize',
 			],
 		],

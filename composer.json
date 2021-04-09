@@ -1,6 +1,6 @@
 {
     "name": "zaxbux/oc-gmaildriver-plugin",
-    "description": "Send email with Gmail using this driver plugin for OctoberCMS.",
+    "description": "Send email with Gmail using this driver plugin.",
     "type": "october-plugin",
     "license": "MIT",
     "authors": [

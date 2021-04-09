@@ -5,6 +5,7 @@ namespace Zaxbux\GmailMailerDriver\Classes;
 use Log;
 use Config;
 use Zaxbux\GmailMailerDriver\Models\Settings;
+use Zaxbux\GmailMailerDriver\Controllers\GoogleAuthRedirectURL;
 use Google_Client;
 use Google_Service_Gmail;
 
@@ -28,21 +29,27 @@ class GoogleAPI {
 	 */
 	private $gmailService;
 
-	public function __construct() {
-		$authConfig  = $this->getAuthConfig();
+	public function __construct($clientId = null, $clientSecret = null) {
+		$authConfig  = Config::get('zaxbux.gmailmailerdriver::google.credentials');
+
 		$accessToken = Settings::get(Settings::TOKEN_FIELD);
 		
 		$this->client = new Google_Client();
-		$this->client->setApplicationName('October CMS Gmail Driver by Zaxbux'); // Used in the request User-Agent header
+		$this->client->setApplicationName('https://github.com/zaxbux/oc-gmaildriver-plugin'); // Used in the request User-Agent header
 
 		$defaultScopes = [ Google_Service_Gmail::GMAIL_SEND ];
 		$this->client->setScopes(Config::get('zaxbux.gmailmailerdriver::google.scopes', $defaultScopes));
 
 		if ($authConfig) {
 			$this->client->setAuthConfig($authConfig);
-			$this->client->setAccessType('offline');
-			$this->client->setPrompt('select_account consent');
+		} else {
+			$this->client->setClientId($clientId ?? Settings::get('client_id'));
+			$this->client->setClientSecret($clientSecret ?? Settings::get('client_secret'));
+			$this->client->setRedirectUri((new GoogleAuthRedirectURL)->actionUrl(''));
 		}
+
+		$this->client->setAccessType('offline');
+		$this->client->setPrompt('select_account consent');
 
 		// Load the previously authorized token, if it exists
 		if ($accessToken) {
@@ -95,18 +102,13 @@ class GoogleAPI {
 	}
 
 	/**
-	 * Get stored OAuth credentials
-	 * @return array|null
+	 * Check if credentials are configured.
+	 * 
+	 * @return bool
 	 */
-	public function getAuthConfig() {
-		$config = Config::get('zaxbux.gmailmailerdriver::google.credentials');
-
-		// Use file uploaded in settings
-		if ($file = Settings::instance()->credentials) {
-			$config = $file->getContents();
-		}
-
-		return $config ? json_decode($config, true) : null;
+	public static function isConfigured() {
+		return Config::get('zaxbux.gmailmailerdriver::google.credentials') !== null ||
+			(Settings::get('client_id') !== null && Settings::get('client_secret') !== null);
 	}
 
 	/**

@@ -2,13 +2,22 @@ fields:
   _auth_redirect_uri:
     type: partial
     path: $/zaxbux/gmailmailerdriver/partials/_auth_redirect_uri.htm
-
-  credentials:
-    type: fileupload
-    label: zaxbux.gmailmailerdriver::lang.settings.field.credentials.label
-    comment: zaxbux.gmailmailerdriver::lang.settings.field.credentials.comment
-    commentHtml: true
-    span: full
-    mode: file
-    fileTypes: json
-    useCaption: false
+  
+  client_id:
+    type: text
+    label: zaxbux.gmailmailerdriver::lang.settings.field.client_id.label
+    comment: zaxbux.gmailmailerdriver::lang.settings.field.client_id.comment
+    required: 1
+    span: left
+  
+  client_secret:
+    type: sensitive
+    label: zaxbux.gmailmailerdriver::lang.settings.field.client_secret.label
+    comment: zaxbux.gmailmailerdriver::lang.settings.field.client_secret.comment
+    required: 1
+    span: right
+  
+  _authorize:
+    type: partial
+    path: $/zaxbux/gmailmailerdriver/partials/_google_api_unauthorized.htm
+    hidden: true

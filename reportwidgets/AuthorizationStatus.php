@@ -10,7 +10,7 @@ class AuthorizationStatus extends \Backend\Classes\ReportWidgetBase {
 
 		$googleAPI = new GoogleAPI();
 
-		if (!$googleAPI->getAuthConfig()) {
+		if (!$googleAPI->isConfigured()) {
 			$this->vars['pluginSettingsURL'] = Backend::url('system/settings/update/zaxbux/gmailmailerdriver/gmail');
 			return $this->makePartial('configure');
 		}

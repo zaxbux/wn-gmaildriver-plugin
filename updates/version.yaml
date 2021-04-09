@@ -1,13 +1,29 @@
-1.0.1: Initialized plugin
-1.0.2: Fixed errors that occur when invalid credentials are supplied
-1.0.3: Fixed logic issues, app is removed from user account when settings are reset. Updated dependencies.
-1.0.4: Fixed issue where backend authorization status showed expired when it was authorized.
-1.0.5: Cleaned up Gmail API authorization flow.
-1.0.6: Added authorization status dashboard widget.
-1.0.7: Added settings permissions.
-1.0.8: Plugin required elevated permissions.
-1.0.9: Improved localization.
-1.0.10: Added ability to change auth scopes used with the Google API client.
-1.0.11: Increased max sending size to 35MB.
-1.0.12: Improve UI
-1.0.13: Added Gmail alias documentation, added ability to pass credentials via envrionment vars.
+1.0.1:
+    - 'Initialized plugin'
+1.0.2:
+    - 'Fixed errors that occur when invalid credentials are supplied'
+1.0.3:
+    - 'Fixed logic issues, app is removed from user account when settings are reset. Updated dependencies.'
+1.0.4:
+    - 'Fixed issue where backend authorization status showed expired when it was authorized.'
+1.0.5:
+    - 'Cleaned up Gmail API authorization flow.'
+1.0.6:
+    - 'Added authorization status dashboard widget.'
+1.0.7:
+    - 'Added settings permissions.'
+1.0.8:
+    - 'Plugin required elevated permissions.'
+1.0.9:
+    - 'Improved localization.'
+1.0.10:
+    - 'Added ability to change auth scopes used with the Google API client.'
+1.0.11:
+    - 'Increased max sending size to 35MB.'
+1.0.12:
+    - 'Improve UI.'
+1.0.13:
+    - 'Added Gmail alias documentation, added ability to pass credentials via envrionment vars.'
+1.0.14:
+    - 'Removed requirement to upload JSON file, client secret is now encrypted in DB.'
+    - 2021_04_08_000001_UpdateSettings.php
