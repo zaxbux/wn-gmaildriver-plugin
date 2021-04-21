@@ -1,13 +1,13 @@
 <?php
 
-namespace Zaxbux\GmailMailerDriver;
+namespace Zaxbux\GmailDriver;
 
 use Log;
 use System\Classes\PluginBase;
-use Zaxbux\GmailMailerDriver\Models\Settings;
-use Zaxbux\GmailMailerDriver\Classes\GoogleAPI;
-use Zaxbux\GmailMailerDriver\Classes\GmailTransport;
-use Zaxbux\GmailMailerDriver\Controllers\GoogleAuthRedirectURL;
+use Zaxbux\GmailDriver\Models\Settings;
+use Zaxbux\GmailDriver\Classes\GoogleAPI;
+use Zaxbux\GmailDriver\Classes\GmailTransport;
+use Zaxbux\GmailDriver\Controllers\GoogleAuthRedirectURL;
 
 class Plugin extends PluginBase {
 	
@@ -24,14 +24,14 @@ class Plugin extends PluginBase {
 	public function registerSettings() {
 		return [
 			'gmail' => [
-				'label'       => 'zaxbux.gmailmailerdriver::lang.settings.label',
-				'description' => 'zaxbux.gmailmailerdriver::lang.settings.description',
+				'label'       => 'zaxbux.gmaildriver::lang.settings.label',
+				'description' => 'zaxbux.gmaildriver::lang.settings.description',
 				'category'    => 'system::lang.system.categories.mail',
 				'icon'        => 'icon-envelope',
-				'class'       => 'Zaxbux\\GmailMailerDriver\\Models\\Settings',
+				'class'       => 'Zaxbux\\GmailDriver\\Models\\Settings',
 				'order'       => 620,
 				'keywords'    => 'google gmail mail email',
-				'permissions' => ['zaxbux.gmailmailerdriver.access_settings'],
+				'permissions' => ['zaxbux.gmaildriver.access_settings'],
 			],
 		];
 	}
@@ -41,9 +41,9 @@ class Plugin extends PluginBase {
 	 */
 	public function registerPermissions() {
 		return [
-			'zaxbux.gmailmailerdriver.access_settings' => [
-				'label' => 'zaxbux.gmailmailerdriver::lang.permissions.access_settings.label',
-				'tab'   => 'zaxbux.gmailmailerdriver::lang.permissions.access_settings.tab',
+			'zaxbux.gmaildriver.access_settings' => [
+				'label' => 'zaxbux.gmaildriver::lang.permissions.access_settings.label',
+				'tab'   => 'zaxbux.gmaildriver::lang.permissions.access_settings.tab',
 			],
 		];
 	}
@@ -53,10 +53,10 @@ class Plugin extends PluginBase {
 	 */
 	public function registerReportWidgets() {
 		return [
-			'Zaxbux\\GmailMailerDriver\\ReportWidgets\\AuthorizationStatus' => [
-				'label'       => 'zaxbux.gmailmailerdriver::lang.widgets.authorizationstatus.label',
+			'Zaxbux\\GmailDriver\\ReportWidgets\\AuthorizationStatus' => [
+				'label'       => 'zaxbux.gmaildriver::lang.widgets.authorizationstatus.label',
 				'context'     => 'dashboard',
-				'permissions' => ['zaxbux.gmailmailerdriver.access_settings'],
+				'permissions' => ['zaxbux.gmaildriver.access_settings'],
 			],
 		];
 	}
@@ -80,7 +80,7 @@ class Plugin extends PluginBase {
 			$widget->addTabFields([
 				'gmail_settings_link' => [
 					'type'    => 'partial',
-					'path'    => '~/plugins/zaxbux/gmailmailerdriver/partials/_gmail_settings_link.htm',
+					'path'    => '~/plugins/zaxbux/gmaildriver/partials/_gmail_settings_link.htm',
 					'tab'     => 'system::lang.mail.general',
 					'trigger' => [
 						'action'    => 'show',
@@ -110,17 +110,17 @@ class Plugin extends PluginBase {
 					$widget->addFields([
 						'_authorized' => [
 							'type' => 'partial',
-							'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_authorized.htm',
+							'path' => '~/plugins/zaxbux/gmaildriver/partials/_google_api_authorized.htm',
 						],
 					]);
 				} else {
 					// Credentials must be present in order for an auth URL to be generated
-					if ($googleAPI->getAuthConfig()) {
+					if ($googleAPI->isConfigured() &&!$googleAPI->isAuthorized()) {
 						// If there is no previous token or it's expired, request authorization from the user.
 						$widget->addFields([
 							'_authorize' => [
 								'type' => 'partial',
-								'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_unauthorized.htm'
+								'path' => '~/plugins/zaxbux/gmaildriver/partials/_google_api_unauthorized.htm'
 							]
 						]);
 						$widget->getField('_authorize')->value = $googleAPI->client->createAuthUrl();
@@ -132,7 +132,7 @@ class Plugin extends PluginBase {
 				$widget->addFields([
 					'_error' => [
 						'type' => 'partial',
-						'path' => '~/plugins/zaxbux/gmailmailerdriver/partials/_google_api_error.htm',
+						'path' => '~/plugins/zaxbux/gmaildriver/partials/_google_api_error.htm',
 					],
 				]);
 			}
@@ -142,7 +142,7 @@ class Plugin extends PluginBase {
 				$widget->addFields([
 					'_review_hidden' => [
 						'type' => 'partial',
-						'path' => '$/zaxbux/gmailmailerdriver/partials/_review.htm',
+						'path' => '$/zaxbux/gmaildriver/partials/_review.htm',
 					],
 				]);
 			}

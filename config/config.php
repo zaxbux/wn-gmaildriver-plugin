@@ -2,7 +2,7 @@
 
 /*
  * WARNING!
- * 
+ * ========
  * This file can be overridden by plugin updates.
  * Copy this file to your global config directory instead: `config/zaxbux/gmailmailerriver/config.php`
  */
@@ -20,7 +20,8 @@ return [
 		//],
 
 		/**
-		 * The contents of the downloaded OAuth credentials JSON file, or an object containing 'client_id' and 'client_secret'
+		 * The contents of the downloaded OAuth credentials JSON file,
+		 * or an object containing 'client_id' and 'client_secret'
 		 */
 		'credentials' => env('GOOGLE_APPLICATION_CREDENTIALS_JSON'),
 	],

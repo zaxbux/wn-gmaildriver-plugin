@@ -1,9 +1,9 @@
 <?php
 
-namespace Zaxbux\GmailMailerDriver\ReportWidgets;
+namespace Zaxbux\GmailDriver\ReportWidgets;
 
 use Backend;
-use Zaxbux\GmailMailerDriver\Classes\GoogleAPI;
+use Zaxbux\GmailDriver\Classes\GoogleAPI;
 
 class AuthorizationStatus extends \Backend\Classes\ReportWidgetBase {
 	public function render() {
@@ -11,7 +11,7 @@ class AuthorizationStatus extends \Backend\Classes\ReportWidgetBase {
 		$googleAPI = new GoogleAPI();
 
 		if (!$googleAPI->isConfigured()) {
-			$this->vars['pluginSettingsURL'] = Backend::url('system/settings/update/zaxbux/gmailmailerdriver/gmail');
+			$this->vars['pluginSettingsURL'] = Backend::url('system/settings/update/zaxbux/gmaildriver/gmail');
 			return $this->makePartial('configure');
 		}
 

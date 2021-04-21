@@ -1,6 +1,6 @@
 <?php
 
-namespace Zaxbux\GmailMailerDriver\Classes;
+namespace Zaxbux\GmailDriver\Classes;
 
 use Log;
 use ApplicationException;
@@ -10,7 +10,7 @@ use Swift_Mime_ContentEncoder_Base64ContentEncoder;
 use Swift_Events_EventListener;
 use Google_Service_Gmail_Message;
 use Google_Http_MediaFileUpload;
-use Zaxbux\GmailMailerDriver\Classes\GoogleAPI;
+use Zaxbux\GmailDriver\Classes\GoogleAPI;
 
 class GmailTransport implements Swift_Transport {
 	
@@ -20,13 +20,13 @@ class GmailTransport implements Swift_Transport {
 	 */
 	private $googleAPI;
 		
-		public function __construct() {
-			$this->googleAPI = new GoogleAPI();
+	public function __construct() {
+		$this->googleAPI = new GoogleAPI();
 
-			if (!$this->googleAPI->isAuthorized()) {
-				throw new \Exception('Cannot send email. Gmail API not authorized.');
-			}
+		if (!$this->googleAPI->isAuthorized()) {
+			throw new \Exception('Cannot send email. Gmail API not authorized.');
 		}
+	}
 
 	/**
 	 * Stub since Gmail API is stateless
@@ -60,7 +60,9 @@ class GmailTransport implements Swift_Transport {
 	/**
 	 * Not implemented
 	 */
-	public function registerPlugin(Swift_Events_EventListener $plugin) {}
+	public function registerPlugin(Swift_Events_EventListener $plugin) {
+		// not implemented
+	}
 
 
 	/**
@@ -76,7 +78,9 @@ class GmailTransport implements Swift_Transport {
 
 			// Resumable upload
 			$usersMessages = $this->googleAPI->getServiceGmail()->users_messages;
-			$gmailMessage = $usersMessages->send('me', $gmailMessage, ['uploadType' => Google_Http_MediaFileUpload::UPLOAD_RESUMABLE_TYPE]);
+			$gmailMessage = $usersMessages->send('me', $gmailMessage, [
+				'uploadType' => Google_Http_MediaFileUpload::UPLOAD_RESUMABLE_TYPE
+			]);
 
 			// Use chunks of 3 MB
 			$chunkSizeBytes = 3 * 1024 * 1024;
@@ -99,7 +103,7 @@ class GmailTransport implements Swift_Transport {
 			$this->googleAPI->client->setDefer(false);
 		} catch (\Google_Service_Exception $ex) {
 			Log::alert($ex);
-			throw new ApplicationException('Failed to send email. Check event log for more info. Message: '.json_decode($ex->getMessage(), true)['error']['message']);
+			throw new ApplicationException('Failed to send email. Check event log for more info.');
 		}
 	}
 }

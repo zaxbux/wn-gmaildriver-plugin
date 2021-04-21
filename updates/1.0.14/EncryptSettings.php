@@ -1,12 +1,14 @@
 <?php
 
-use October\Rain\Database\Updates\Migration;
-use Zaxbux\GmailMailerDriver\Models\Settings;
+namespace Zaxbux\GmailDriver\Updates;
 
-class UpdateSettings_2021_04_08_000001 extends Migration {
+use Winter\Rain\Database\Updates\Migration;
+use Zaxbux\GmailDriver\Models\Settings;
+
+class EncryptSettings extends Migration {
 	public function up() {
 		// Convert settings file into encrypted JSON
-		if($file = Settings::instance()->credentials) {
+		if ($file = Settings::instance()->credentials) {
 			$config = \json_decode($file->getContents(), true);
 
 			// Adapted from: https://github.com/googleapis/google-api-php-client/blob/c925552c84ca5cf02e36b83e72b5371ec3bea391/src/Client.php#L970
@@ -24,8 +26,6 @@ class UpdateSettings_2021_04_08_000001 extends Migration {
 					'client_secret' => encrypt($config['client_secret']),
 				]);
 			}
-
-			
 		}
 	}
 

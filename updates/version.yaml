@@ -26,4 +26,4 @@
     - 'Added Gmail alias documentation, added ability to pass credentials via envrionment vars.'
 1.0.14:
     - 'Removed requirement to upload JSON file, client secret is now encrypted in DB.'
-    - 2021_04_08_000001_UpdateSettings.php
+    - '1.0.14/EncryptSettings.php'

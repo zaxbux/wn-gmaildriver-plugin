@@ -1,6 +1,6 @@
 # Gmail Mailer Driver
 
-Send email with Gmail using this driver plugin for October CMS.
+Send email with Gmail using this driver plugin for Winter CMS.
 
 ## Requirements
 
@@ -42,7 +42,7 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 This section is for advanced users.
 
-**Note:** To avoid overwriting your custom configuration with plugin updates, copy the provided `config.php` to your October CMS's config directory: `config/zaxbux/gmailmailerdriver/config.php`.
+**Note:** To avoid overwriting your custom configuration with plugin updates, copy the provided `config.php` to the Winter CMS config directory: `config/zaxbux/gmaildriver/config.php`.
 
 ### Providing credentials
 

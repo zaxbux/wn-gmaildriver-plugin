@@ -1,13 +1,13 @@
 <?php
 
-namespace Zaxbux\GmailMailerDriver\Models;
+namespace Zaxbux\GmailDriver\Models;
 
 use Log;
-use October\Rain\Database\Model;
-use Zaxbux\GmailMailerDriver\Classes\GoogleAPI;
+use Winter\Rain\Database\Model;
+use Zaxbux\GmailDriver\Classes\GoogleAPI;
 
 class Settings extends Model {
-	use \October\Rain\Database\Traits\Validation;
+	use \Winter\Rain\Database\Traits\Validation;
 
 	const TOKEN_FIELD  = 'token';
 	const CONFIG_FIELD = 'credentials';
@@ -16,7 +16,7 @@ class Settings extends Model {
 		\System\Behaviors\SettingsModel::class
 	];
 
-	public $settingsCode   = 'zaxbux_gmailmailerdriver_settings';
+	public $settingsCode   = 'zaxbux_gmaildriver_settings';
 	public $settingsFields = 'fields.yaml';
 
 	public $attachOne = [

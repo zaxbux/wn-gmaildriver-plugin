@@ -1,11 +1,11 @@
 <?php
 
-namespace Zaxbux\GmailMailerDriver\Classes;
+namespace Zaxbux\GmailDriver\Classes;
 
 use Log;
 use Config;
-use Zaxbux\GmailMailerDriver\Models\Settings;
-use Zaxbux\GmailMailerDriver\Controllers\GoogleAuthRedirectURL;
+use Zaxbux\GmailDriver\Models\Settings;
+use Zaxbux\GmailDriver\Controllers\GoogleAuthRedirectURL;
 use Google_Client;
 use Google_Service_Gmail;
 
@@ -30,15 +30,17 @@ class GoogleAPI {
 	private $gmailService;
 
 	public function __construct($clientId = null, $clientSecret = null) {
-		$authConfig  = Config::get('zaxbux.gmailmailerdriver::google.credentials');
+		$authConfig  = Config::get('zaxbux.gmaildriver::google.credentials');
 
 		$accessToken = Settings::get(Settings::TOKEN_FIELD);
 		
 		$this->client = new Google_Client();
-		$this->client->setApplicationName('https://github.com/zaxbux/oc-gmaildriver-plugin'); // Used in the request User-Agent header
+
+		// Used in the request User-Agent header
+		$this->client->setApplicationName('https://github.com/zaxbux/wn-gmaildriver-plugin');
 
 		$defaultScopes = [ Google_Service_Gmail::GMAIL_SEND ];
-		$this->client->setScopes(Config::get('zaxbux.gmailmailerdriver::google.scopes', $defaultScopes));
+		$this->client->setScopes(Config::get('zaxbux.gmaildriver::google.scopes', $defaultScopes));
 
 		if ($authConfig) {
 			$this->client->setAuthConfig($authConfig);
@@ -103,11 +105,10 @@ class GoogleAPI {
 
 	/**
 	 * Check if credentials are configured.
-	 * 
 	 * @return bool
 	 */
 	public static function isConfigured() {
-		return Config::get('zaxbux.gmailmailerdriver::google.credentials') !== null ||
+		return Config::get('zaxbux.gmaildriver::google.credentials') !== null ||
 			(Settings::get('client_id') !== null && Settings::get('client_secret') !== null);
 	}
 

@@ -42,7 +42,7 @@
 		],
 	],
 	'widgets' => [
-		'authorizationstatus' => [
+		'authorizationStatus' => [
 			'label'        => 'Gmail Driver Authorization Status',
 			'authorized'   => [
 				'label'   => 'Authorized',
