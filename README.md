@@ -2,6 +2,12 @@
 
 Send email with Gmail using this driver plugin for Winter CMS.
 
+## Installing
+
+```bash
+composer require zaxbux/wn-gmaildriver-plugin
+```
+
 ## Requirements
 
 * A Gmail account. Google Workspace (G Suite) accounts are also supported, if your administrator has enabled access.
