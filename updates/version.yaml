@@ -27,3 +27,5 @@
 1.0.14:
     - 'Removed requirement to upload JSON file, client secret is now encrypted in DB.'
     - '1.0.14/EncryptSettings.php'
+1.0.15:
+    - 'Fixed migration to Winter (@mjauvin)'

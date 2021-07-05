@@ -62,6 +62,7 @@ Example:
 
 ## Change Log
 
+* **1.0.15** - Fixed migration to Winter (@mjauvin)
 * **1.0.14** - Removed requirement to upload JSON file, client secret is now encrypted in DB.
 * **1.0.13** - Added Gmail alias documentation, added ability to pass credentials via environment vars.
 * **1.0.12** - Improve UI.
