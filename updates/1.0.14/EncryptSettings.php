@@ -2,7 +2,7 @@
 
 namespace Zaxbux\GmailDriver\Updates;
 
-use Winter\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 use Zaxbux\GmailDriver\Models\Settings;
 
 class EncryptSettings extends Migration {

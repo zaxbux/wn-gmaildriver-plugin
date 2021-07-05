@@ -3,11 +3,11 @@
 namespace Zaxbux\GmailDriver\Models;
 
 use Log;
-use Winter\Rain\Database\Model;
+use Winter\Storm\Database\Model;
 use Zaxbux\GmailDriver\Classes\GoogleAPI;
 
 class Settings extends Model {
-	use \Winter\Rain\Database\Traits\Validation;
+	use \Winter\Storm\Database\Traits\Validation;
 
 	const TOKEN_FIELD  = 'token';
 	const CONFIG_FIELD = 'credentials';
