@@ -2,6 +2,8 @@
 
 Send email with Gmail using this driver plugin for Winter CMS.
 
+> **Note:** You must use version [1.0.13](https://github.com/zaxbux/wn-gmaildriver-plugin/releases/tag/v1.0.15) with Winter CMS.
+
 ## Installing
 
 ```bash
@@ -29,7 +31,8 @@ In case you want to revoke access, click **Reset to default** on the *Gmail conf
 
 ## Important Notes
 * The Gmail API will only send emails as the account which you granted access with, it is currently not possible to send email as another user.
-* You can send email using another email address you own, using an alias. [Learn more](https://support.google.com/mail/answer/22370). Change the *Sender name* and *Sender email* in **Mail configuration** to match your alias.
+* The Gmail API has [sending limits](https://developers.google.com/gmail/api/reference/quota) for [free (consumer)](https://support.google.com/mail/answer/22839#zippy=you-have-reached-a-limit-for-sending-mail) and [paid (Workspace)](https://support.google.com/a/answer/166852#limits) accounts.
+* You can send email using another email address you own, using an alias. [Learn more about configuring sending aliases in this Google Support article](https://support.google.com/mail/answer/22370). Change the *Sender name* and *Sender email* in **Mail configuration** to match your alias.
 
 ## Advanced Usage
 
@@ -62,7 +65,7 @@ Example:
 
 ## Change Log
 
-* **1.0.15** - Fixed migration to Winter (@mjauvin)
+* **1.0.15** - Fixed migration to Winter ([@mjauvin](https://github.com/mjauvin))
 * **1.0.14** - Removed requirement to upload JSON file, client secret is now encrypted in DB.
 * **1.0.13** - Added Gmail alias documentation, added ability to pass credentials via environment vars.
 * **1.0.12** - Improve UI.
