@@ -2,7 +2,7 @@
 
 Send email with Gmail using this driver plugin for Winter CMS.
 
-> **Note:** You must use version [1.0.13](https://github.com/zaxbux/wn-gmaildriver-plugin/releases/tag/v1.0.15) with Winter CMS.
+> **Note:** You must use version [1.0.15](https://github.com/zaxbux/wn-gmaildriver-plugin/releases/tag/v1.0.15) with Winter CMS.
 
 ## Installing
 
