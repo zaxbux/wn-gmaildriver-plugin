@@ -1,5 +1,11 @@
 # Gmail Mailer Driver
 
+![GitHub](https://img.shields.io/github/license/zaxbux/wn-gmaildriver-plugin)
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/zaxbux/wn-gmaildriver-plugin)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/zaxbux/wn-gmaildriver-plugin)
+![Packagist Version](https://img.shields.io/packagist/v/zaxbux/wn-gmaildriver-plugin)
+
+
 Send email with Gmail using this driver plugin for Winter CMS.
 
 > **Note:** You must use version [1.0.15](https://github.com/zaxbux/wn-gmaildriver-plugin/releases/tag/v1.0.15) with Winter CMS.
