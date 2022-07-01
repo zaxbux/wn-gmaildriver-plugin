@@ -19,7 +19,7 @@
         "php": ">=7.4",
         "composer/installers": "~1.0",
         "google/apiclient": "~2.7",
-        "guzzlehttp/guzzle": "~6.3"
+        "guzzlehttp/guzzle": "~6.5"
     },
     "scripts": {
         "post-update-cmd": ["Google\\Task\\Composer::cleanup"]
