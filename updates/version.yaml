@@ -29,3 +29,5 @@
     - '1.0.14/EncryptSettings.php'
 1.0.15:
     - 'Fixed migration to Winter (@mjauvin)'
+1.0.16:
+    - 'Fixed localization key issue and updated dependencies.'
