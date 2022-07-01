@@ -54,7 +54,7 @@ class Plugin extends PluginBase {
 	public function registerReportWidgets() {
 		return [
 			'Zaxbux\\GmailDriver\\ReportWidgets\\AuthorizationStatus' => [
-				'label'       => 'zaxbux.gmaildriver::lang.widgets.authorizationstatus.label',
+				'label'       => 'zaxbux.gmaildriver::lang.widgets.authorizationStatus.label',
 				'context'     => 'dashboard',
 				'permissions' => ['zaxbux.gmaildriver.access_settings'],
 			],
