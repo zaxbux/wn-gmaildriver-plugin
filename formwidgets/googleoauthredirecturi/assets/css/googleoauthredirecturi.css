@@ -1,0 +1,12 @@
+div[data-control="googleoauthredirecturi"] input[readonly][data-input] {
+	background-color: #fff !important;
+	color: #385478;
+	cursor: text;
+	user-select: all;
+}
+
+div[data-control="googleoauthredirecturi"] a[data-copy] {
+	box-shadow: none;
+	border: 1px solid #d1d6d9;
+	border-left: 0
+}

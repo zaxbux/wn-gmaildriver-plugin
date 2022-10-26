@@ -1,0 +1,17 @@
+<div class="callout fade in <?= $isAuthorized ? 'callout-success' : 'callout-warning' ?>">
+	<div class="header">
+		<i class="<?= $isAuthorized ? 'icon-check-circle' : 'icon-warning' ?>"></i>
+		<h3><?= e(trans('zaxbux.gmaildriver::lang.formwidgets.google_oauth.label')); ?></h3>
+		<p><?= e(trans('zaxbux.gmaildriver::lang.formwidgets.google_oauth.comment', ['app_name' => Config::get('app.name')])); ?></p>
+	</div>
+	<div class="content">
+		<p>
+			<button class="btn btn-primary" data-request="<?= $this->getEventHandler('onAuthorize') ?>" data-request-confirm="<?= e(trans('zaxbux.gmaildriver::lang.formwidgets.google_oauth.authorize_confirm', ['app_name' => Config::get('app.name')])); ?>" data-request-flash <?php if ($this->formField->disabled || $isAuthorized) : ?>disabled<?php endif ?>>
+				<?= e(trans('zaxbux.gmaildriver::lang.formwidgets.google_oauth.button_authorize')); ?>
+			</button>
+			<button class="btn btn-danger" data-request="<?= $this->getEventHandler('onRevoke') ?>" data-request-confirm="<?= e(trans('zaxbux.gmaildriver::lang.formwidgets.google_oauth.revoke_confirm')); ?>" data-request-data="refresh:1" data-request-flash <?php if ($this->formField->disabled || !$isAuthorized) : ?>disabled<?php endif ?>>
+				<?= e(trans('zaxbux.gmaildriver::lang.formwidgets.google_oauth.button_revoke')); ?>
+			</button>
+		</p>
+	</div>
+</div>

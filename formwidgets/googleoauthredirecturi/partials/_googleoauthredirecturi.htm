@@ -1,0 +1,8 @@
+<div data-control="googleoauthredirecturi">
+	<div class="input-group">
+		<input type="text" name="<?= $this->getFieldName() ?>" id="<?= $this->getId() ?>" value="<?= $value ?>" class="form-control" <?php if ($this->previewMode) : ?> disabled="disabled" <?php endif ?> readonly autocomplete="off" data-input />
+		<a href="javascript:;" class="input-group-addon btn btn-secondary" title="<?= e(trans('zaxbux.gmaildriver::lang.formwidgets.google_oauth_redirect_uri.copy')) ?>" data-copy>
+			<i class="icon-copy"></i>
+		</a>
+	</div>
+</div>
