@@ -132,7 +132,7 @@ class Plugin extends PluginBase
 				...$tabConfig,
 			],
 			'gmail_client_secret' => [
-				//'type' => 'sensitive',
+				'type' => 'sensitive',
 				'label' => 'zaxbux.gmaildriver::lang.settings.client_secret.label',
 				'comment' => 'zaxbux.gmaildriver::lang.settings.client_secret.comment',
 				'commentHtml' => true,
