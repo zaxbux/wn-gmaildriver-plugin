@@ -2,7 +2,12 @@
     "name": "zaxbux/wn-gmaildriver-plugin",
     "description": "Send email with Gmail using this driver plugin.",
     "homepage": "https://github.com/zaxbux/wn-gmaildriver-plugin",
-    "keywords": ["winter", "wintercms", "gmail", "workspace"],
+    "keywords": [
+        "winter",
+        "wintercms",
+        "gmail",
+        "workspace"
+    ],
     "type": "winter-plugin",
     "license": "MIT",
     "authors": [
@@ -18,16 +23,22 @@
     "require": {
         "php": ">=7.4",
         "composer/installers": "~1.0",
-        "google/apiclient": "~2.7",
-        "guzzlehttp/guzzle": "~6.5"
+        "google/apiclient": "~2.7"
     },
     "scripts": {
-        "post-update-cmd": ["Google\\Task\\Composer::cleanup"]
+        "post-update-cmd": [
+            "Google\\Task\\Composer::cleanup"
+        ]
     },
     "extra": {
         "google/apiclient-services": [
             "Gmail"
         ],
         "installer-name": "gmaildriver"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }
