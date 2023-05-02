@@ -17,8 +17,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/wintercms/zaxbux/wn-gmaildriver-plugin/issues",
-        "source": "https://github.com/wintercms/zaxbux/wn-gmaildriver-plugin"
+        "issues": "https://github.com/zaxbux/wn-gmaildriver-plugin/issues",
+        "source": "https://github.com/zaxbux/wn-gmaildriver-plugin"
     },
     "require": {
         "php": ">=7.4",
